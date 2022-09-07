@@ -1,0 +1,107 @@
+
+<core:View
+controllerName="zurich.fscm.ui.cpcd.his.controller.Report"
+xmlns:core="sap.ui.core"
+xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+xmlns:form="sap.ui.layout.form" 
+xmlns:layout="sap.ui.layout"
+xmlns:smartfield="sap.ui.comp.smartfield" 
+xmlns:smartfilterbar="sap.ui.comp.smartfilterbar" 
+xmlns:smartlink="sap.ui.comp.navpopover"
+xmlns:smarttable="sap.ui.comp.smarttable" 
+xmlns:table="sap.ui.table" 
+xmlns:unified="sap.ui.unified" 
+xmlns="sap.m" xmlns:f="sap.f"
+xmlns:footerbar="sap.ushell.ui.footerbar" 
+xmlns:variants="sap.ui.comp.smartvariants">
+    <f:DynamicPage id="page" busyIndicatorDelay="400" enableScrolling="true" navButtonPress="onNavigationPress" showNavButton="true"
+            fitContent="true" preserveHeaderStateOnScroll="true" headerExpanded="{page>/headerExpanded}" showFooter="true">
+    <f:title>
+        <f:DynamicPageTitle id="_IDGenDynamicPageTitle1">
+            <f:heading>
+                <variants:SmartVariantManagement                         
+                id="__SVM01"
+                    persistencyKey="SVM"
+                    entitySet="zz9fscm_cpcd_history_od"  
+                showExecuteOnSelection="true" 
+                showShare="true"/>
+            </f:heading>
+            <f:snappedContent>
+                <Text id="fin.gl.documentdisplay.FilterText" wrapping="false"></Text>
+            </f:snappedContent>
+        </f:DynamicPageTitle>
+    </f:title>
+    <f:header>
+        <f:DynamicPageHeader id="_IDGenDynamicPageHeader1" pinnable="false">
+        <f:content>
+            <smartfilterbar:SmartFilterBar id="smartFilterBar"                     
+                smartVariant="__SVM01"
+                        persistencyKey="smartFilterBar" 
+                        entitySet="zz9fscm_cpcd_history_od" initialized="onInitialised" enableBasicSearch="false"
+                filterContainerWidth="10rem" useToolbar="false" assignedFiltersChanged="onAssignedFiltersChanged" beforeVariantFetch="onBeforeVariantFetch"
+                afterVariantLoad="onAfterVariantLoad" search="onSearch">
+                <smartfilterbar:layoutData>
+                    <FlexItemData id="_IDGenFlexItemData1" shrinkFactor="0"/>
+                </smartfilterbar:layoutData>
+ 			<smartfilterbar:controlConfiguration>
+				<smartfilterbar:ControlConfiguration key="RepUnit" index="1" visibleInAdvancedArea="true"/>
+	            <smartfilterbar:ControlConfiguration key="ValueDate" index="2" visibleInAdvancedArea="true"/>  
+				<smartfilterbar:ControlConfiguration key="BankAccL" index="3" visibleInAdvancedArea="true" label="Local Account ID"/>
+	            <smartfilterbar:ControlConfiguration key="Status" index="4" visibleInAdvancedArea="true">
+					<smartfilterbar:customControl>
+						<MultiComboBox id="status" customData:hasValue="false" selectionChange="customFieldChange">
+                        	<core:Item key="99" text="No 4eye"/>
+							<core:Item key="01" text="Draft"/>
+                            <core:Item key="02" text="Pending Apporval"/>
+                            <core:Item key="03" text="Approved"/>  
+                             <core:Item key="08" text="Released"/>                                                        
+						</MultiComboBox>
+					</smartfilterbar:customControl>                
+                </smartfilterbar:ControlConfiguration>                  
+				<smartfilterbar:ControlConfiguration key="Amount" index="5" visibleInAdvancedArea="true"/>
+	            <smartfilterbar:ControlConfiguration key="currency" index="6" visibleInAdvancedArea="true"/>       
+				<smartfilterbar:ControlConfiguration key="Remittance" index="7" visibleInAdvancedArea="true"/>
+	            <smartfilterbar:ControlConfiguration key="IdocNum" index="8" visibleInAdvancedArea="true"/>    
+	            <smartfilterbar:ControlConfiguration key="Scenario" index="9" visibleInAdvancedArea="true">
+					<smartfilterbar:customControl>
+						<Select id="scenario" customData:hasValue="false" selectionChange="customFieldChange">
+							<core:Item key="01" text="Cash Pooling"/>
+							<core:Item key="02 " text="Call Deposit"/>
+						</Select>
+					</smartfilterbar:customControl>
+                 </smartfilterbar:ControlConfiguration>                                                                   
+			</smartfilterbar:controlConfiguration>   
+
+            </smartfilterbar:SmartFilterBar>
+        </f:content>
+
+        </f:DynamicPageHeader>
+    </f:header>
+    
+    <f:content>
+    <!--enableAutoColumnWidth="true"-->
+        <smarttable:SmartTable id="smartTable" 
+            afterVariantApply="onAfterApplyTableVariant"
+            afterVariantSave="onAfterTableVariantSave"
+            beforeRebindTable="onBeforeRebindTable"
+            beforeExport="onBeforeExport"
+            entitySet="zz9fscm_cpcd_history_od"
+            header="Report"
+            smartFilterId="smartFilterBar"
+            class="stickyToolbar"
+            initialise="onAfterRendering"
+            initiallyVisibleFields="RepUnit,ValueDate,BankAccL,StatusT,Amount,currency,BankAccG,Remittance,IdocNum,Scenario"
+            showRowCount="true" 
+            tableType="ResponsiveTable">
+        <smarttable:customToolbar>
+        <OverflowToolbar id="stickyToolbar" design="Solid" class="stickyToolbar">
+         </OverflowToolbar>
+        </smarttable:customToolbar>     
+		<Table sticky="ColumnHeaders,HeaderToolbar" />        
+            <smarttable:layoutData>
+                <FlexItemData id="_IDGenFlexItemData2" growFactor="1" baseSize="0%"/>
+            </smarttable:layoutData> 
+    </smarttable:SmartTable>
+    </f:content>
+    </f:DynamicPage>
+</core:View>

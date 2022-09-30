@@ -66,7 +66,7 @@ xmlns:variants="sap.ui.comp.smartvariants">
 					<smartfilterbar:customControl>
 						<Select id="scenario" customData:hasValue="false" selectionChange="customFieldChange">
 							<core:Item key="01" text="Cash Pooling"/>
-							<core:Item key="02 " text="Call Deposit"/>
+							<core:Item key="02" text="Call Deposit"/>
 						</Select>
 					</smartfilterbar:customControl>
                  </smartfilterbar:ControlConfiguration>                                                                   

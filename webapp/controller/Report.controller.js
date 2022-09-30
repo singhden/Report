@@ -44,7 +44,10 @@ sap.ui.define([
 			var mBindingParams = oEvent.getParameter("bindingParams");
 			var scenario = this.getView().byId("scenario").getSelectedKey();
             if (scenario.length>0){
-                mBindingParams.filters.push(new Filter("Type", FilterOperator.EQ, scenario));                
+                mBindingParams.filters.push(new Filter("Type", FilterOperator.EQ, scenario));  
+                if  (scenario === "02"){
+                    mBindingParams.filters.push(new Filter("Type", FilterOperator.EQ, "03"));                     
+                }                          
             }                            
 
 			var status = this.getView().byId("status"), newFilter ;
@@ -74,6 +77,8 @@ sap.ui.define([
                     }              
 				//}
 			}
+
+            
 		},
         /**
          * Event handler for refresh event. Keeps filter, sort
